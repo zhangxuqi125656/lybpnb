@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BP工作站 - 行政工作流程中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        neutral: '#F5F7FA',
+                        'neutral-dark': '#4E5969',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .shadow-soft {
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            }
+            .transition-custom {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral font-sans text-neutral-dark">
+    <!-- 简化导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-soft">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+                    <i class="fa fa-building-o text-white text-xl"></i>
+                </div>
+                <span class="text-xl font-bold text-primary">BP工作站</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section id="home" class="bg-gradient-to-br from-primary/10 to-secondary/10 py-20 md:py-32">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-primary mb-6">
+                        BP工作站<br>行政工作流程中心
+                    </h1>
+                    <p class="text-lg md:text-xl text-neutral-dark/80 mb-10">
+                        简化行政流程，提升工作效率，为您提供一站式行政服务指南
+                    </p>
+                    <!-- 删除了查看申请流程按钮 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 详细流程展示 - 办公用品申请 -->
+        <section id="office-supplies" class="py-16 md:py-24 bg-neutral">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-soft p-8 md:p-12">
+                    <div class="flex items-center mb-8">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
+                            <i class="fa fa-pencil-square-o text-xl text-primary"></i>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-primary">办公用品申请流程</h2>
+                    </div>
+                    
+                    <div class="prose max-w-none">
+                        <p class="text-lg text-neutral-dark/80 mb-8">
+                            本流程适用于公司员工申请各类办公用品，包括文具、电脑设备、办公家具等。请按照以下步骤完成申请：
+                        </p>
+                        
+                        <!-- 步骤展示 -->
+                        <div class="space-y-8 mb-12">
+                            <!-- 步骤1 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">1</div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-bold mb-2 text-primary">提交申请</h3>
+                                    <p class="text-neutral-dark/70">
+                                        按需进行数据提交，<a href="https://f.kdocs.cn/ksform/w/write/KB56ZUKb" target="_blank" class="text-primary hover:underline">点击此处进行提交</a>。
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 步骤2 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">2</div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-bold mb-2 text-primary">点击链接查看数据</h3>
+                                    <p class="text-neutral-dark/70">
+                                        <a href="https://www.kdocs.cn/l/cetguPn3l7o0" target="_blank" class="text-primary hover:underline">数据查看</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 步骤3 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">3</div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-bold mb-2 text-primary">提交ERP申请</h3>
+                                    <p class="text-neutral-dark/70">
+                                        打开链接找到自己提交的数据，复制出去，贴到上传模板中，上传ERP进行数据提交。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 流程图 -->
+                        <div class="bg-neutral rounded-lg p-6 mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-primary">申请流程图</h3>
+                            <div class="relative">
+                                <!-- 流程图SVG -->
+                                <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" class="w-full">
+                                    <!-- 流程步骤 -->
+                                    <rect x="50" y="50" width="120" height="60" rx="10" fill="#165DFF" class="hover:opacity-90 cursor-pointer" />
+                                    <rect x="300" y="50" width="120" height="60" rx="10" fill="#165DFF" class="hover:opacity-90 cursor-pointer" />
+                                    <rect x="550" y="50" width="120" height="60" rx="10" fill="#165DFF" class="hover:opacity-90 cursor-pointer" />
+                                    
+                                    <!-- 连接线 -->
+                                    <line x1="170" y1="80" x2="300" y2="80" stroke="#165DFF" stroke-width="3" stroke-linecap="round" />
+                                    <line x1="420" y1="80" x2="550" y2="80" stroke="#165DFF" stroke-width="3" stroke-linecap="round" />
+                                    
+                                    <!-- 箭头 -->
+                                    <polygon points="295,75 300,80 295,85" fill="#165DFF" />
+                                    <polygon points="545,75 550,80 545,85" fill="#165DFF" />
+                                    
+                                    <!-- 文字 -->
+                                    <text x="110" y="85" text-anchor="middle" fill="white" font-size="14" font-weight="bold">提交申请</text>
+                                    <text x="360" y="85" text-anchor="middle" fill="white" font-size="14" font-weight="bold">数据查看</text>
+                                    <text x="610" y="85" text-anchor="middle" fill="white" font-size="14" font-weight="bold">ERP提交</text>
+                                    
+                                    <!-- 标题 -->
+                                    <text x="400" y="30" text-anchor="middle" fill="#4E5969" font-size="16" font-weight="bold">办公用品申请流程</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
+                        <i class="fa fa-building-o text-white text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold">BP工作站</span>
+                </div>
+                <p class="text-white/70 mb-4 max-w-2xl mx-auto">
+                    为企业提供高效、便捷的行政服务平台，简化流程，提升效率。
+                </p>
+                <div class="flex justify-center space-x-4 mb-8">
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-custom">
+                        <i class="fa fa-weixin"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-custom">
+                        <i class="fa fa-weibo"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-custom">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                </div>
+                <p class="text-white/50 text-sm">
+                    © 2025 BP工作站. 保留所有权利.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // 考虑导航栏高度
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>
