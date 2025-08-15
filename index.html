@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BP工作站 - 行政工作流程中心</title>
+    <title>音乐识别 - 歌词秀</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -11,13 +11,15 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#165DFF',
-                        secondary: '#36CFC9',
-                        neutral: '#F5F7FA',
-                        'neutral-dark': '#4E5969',
+                        primary: '#6C5CE7',
+                        secondary: '#00CEFF',
+                        accent: '#FD79A8',
+                        dark: '#2D3436',
+                        light: '#F8F9FA',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        sans: ['Poppins', 'system-ui', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
                     },
                 }
             }
@@ -29,123 +31,185 @@
                 content-visibility: auto;
             }
             .shadow-soft {
-                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             }
             .transition-custom {
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
+            .lyrics-container {
+                height: 400px;
+                overflow-y: auto;
+            }
+            .lyrics-line {
+                transition: all 0.3s ease;
+            }
+            .lyrics-line.active {
+                color: #6C5CE7;
+                transform: scale(1.05);
+                font-weight: bold;
+            }
+            .pulse-animation {
+                animation: pulse 1.5s infinite;
+            }
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.1);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
         }
     </style>
 </head>
-<body class="bg-neutral font-sans text-neutral-dark">
-    <!-- 简化导航栏 -->
-    <header class="sticky top-0 z-50 bg-white shadow-soft">
+<body class="bg-gradient-to-br from-light to-gray-100 font-sans text-dark">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-soft">
         <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                    <i class="fa fa-building-o text-white text-xl"></i>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+                        <i class="fa fa-music text-white text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold text-primary font-display">音乐识别 - 歌词秀</span>
                 </div>
-                <span class="text-xl font-bold text-primary">BP工作站</span>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="text-dark/80 hover:text-primary transition-custom">首页</a>
+                    <a href="#features" class="text-dark/80 hover:text-primary transition-custom">功能</a>
+                    <a href="#about" class="text-dark/80 hover:text-primary transition-custom">关于</a>
+                </nav>
+                <button class="md:hidden text-dark">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
     </header>
 
     <main>
         <!-- 英雄区域 -->
-        <section id="home" class="bg-gradient-to-br from-primary/10 to-secondary/10 py-20 md:py-32">
-            <div class="container mx-auto px-4">
+        <section id="home" class="bg-gradient-to-br from-primary/10 to-secondary/10 py-20 md:py-32 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <defs>
+                        <pattern id="music-notes" width="80" height="80" patternUnits="userSpaceOnUse">
+                            <text x="10" y="40" font-family="FontAwesome" font-size="24" fill="currentColor">
+                                <tspan x="10" dy="0">&#xf001;</tspan>
+                                <tspan x="50" dy="-10">&#xf002;</tspan>
+                            </text>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#music-notes)" />
+                </svg>
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
                 <div class="max-w-3xl mx-auto text-center">
-                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-primary mb-6">
-                        BP工作站<br>行政工作流程中心
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-primary mb-6 font-display">
+                        音乐识别<br>歌词秀
                     </h1>
-                    <p class="text-lg md:text-xl text-neutral-dark/80 mb-10">
-                        简化行政流程，提升工作效率，为您提供一站式行政服务指南
+                    <p class="text-lg md:text-xl text-dark/80 mb-10">
+                        只需点击录音，轻松识别周围播放的音乐，即时获取歌词并个性化展示
                     </p>
-                    <!-- 删除了查看申请流程按钮 -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                        <button id="record-btn" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full shadow-lg transition-custom flex items-center space-x-2 pulse-animation">
+                            <i class="fa fa-microphone"></i>
+                            <span>开始识别</span>
+                        </button>
+                        <button id="upload-btn" class="bg-white hover:bg-gray-100 text-primary border border-primary px-8 py-3 rounded-full shadow-lg transition-custom flex items-center space-x-2">
+                            <i class="fa fa-upload"></i>
+                            <span>上传音频</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 详细流程展示 - 办公用品申请 -->
-        <section id="office-supplies" class="py-16 md:py-24 bg-neutral">
+        <!-- 功能区域 -->
+        <section id="features" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-soft p-8 md:p-12">
-                    <div class="flex items-center mb-8">
-                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
-                            <i class="fa fa-pencil-square-o text-xl text-primary"></i>
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 font-display">核心功能</h2>
+                    <p class="text-lg text-dark/70 max-w-2xl mx-auto">
+                        我们提供强大的音乐识别技术和灵活的歌词展示方式，让您的音乐体验更加丰富
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                    <!-- 识别结果区域 -->
+                    <div class="bg-light rounded-xl shadow-soft p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
+                                <i class="fa fa-headphones text-xl text-primary"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-primary">识别结果</h3>
                         </div>
-                        <h2 class="text-2xl md:text-3xl font-bold text-primary">办公用品申请流程</h2>
+
+                        <div id="recognition-result" class="space-y-4">
+                            <div class="text-center py-12 text-dark/50">
+                                <i class="fa fa-music text-6xl mb-4 block"></i>
+                                <p>点击开始识别按钮，识别正在播放的音乐</p>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="prose max-w-none">
-                        <p class="text-lg text-neutral-dark/80 mb-8">
-                            本流程适用于公司员工申请各类办公用品，包括文具、电脑设备、办公家具等。请按照以下步骤完成申请：
-                        </p>
-                        
-                        <!-- 步骤展示 -->
-                        <div class="space-y-8 mb-12">
-                            <!-- 步骤1 -->
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">1</div>
-                                <div class="ml-4">
-                                    <h3 class="text-xl font-bold mb-2 text-primary">提交申请</h3>
-                                    <p class="text-neutral-dark/70">
-                                        按需进行数据提交，<a href="https://f.kdocs.cn/ksform/w/write/KB56ZUKb" target="_blank" class="text-primary hover:underline">点击此处进行提交</a>。
-                                    </p>
+
+                    <!-- 歌词展示区域 -->
+                    <div class="bg-light rounded-xl shadow-soft p-8 flex flex-col">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4">
+                                    <i class="fa fa-align-left text-xl text-secondary"></i>
                                 </div>
+                                <h3 class="text-2xl font-bold text-secondary">歌词展示</h3>
                             </div>
-                            
-                            <!-- 步骤2 -->
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">2</div>
-                                <div class="ml-4">
-                                    <h3 class="text-xl font-bold mb-2 text-primary">点击链接查看数据</h3>
-                                    <p class="text-neutral-dark/70">
-                                        <a href="https://www.kdocs.cn/l/cetguPn3l7o0" target="_blank" class="text-primary hover:underline">数据查看</a>
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <!-- 步骤3 -->
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">3</div>
-                                <div class="ml-4">
-                                    <h3 class="text-xl font-bold mb-2 text-primary">提交ERP申请</h3>
-                                    <p class="text-neutral-dark/70">
-                                        打开链接找到自己提交的数据，复制出去，贴到上传模板中，上传ERP进行数据提交。
-                                    </p>
-                                </div>
+                            <div class="flex space-x-2">
+                                <button id="mode-default" class="px-3 py-1 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-custom active">默认模式</button>
+                                <button id="mode-karaoke" class="px-3 py-1 rounded bg-secondary/10 text-secondary hover:bg-secondary/20 transition-custom">卡拉OK</button>
+                                <button id="mode-scroll" class="px-3 py-1 rounded bg-accent/10 text-accent hover:bg-accent/20 transition-custom">滚动模式</button>
                             </div>
                         </div>
-                        
-                        <!-- 流程图 -->
-                        <div class="bg-neutral rounded-lg p-6 mb-8">
-                            <h3 class="text-xl font-bold mb-4 text-primary">申请流程图</h3>
-                            <div class="relative">
-                                <!-- 流程图SVG -->
-                                <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" class="w-full">
-                                    <!-- 流程步骤 -->
-                                    <rect x="50" y="50" width="120" height="60" rx="10" fill="#165DFF" class="hover:opacity-90 cursor-pointer" />
-                                    <rect x="300" y="50" width="120" height="60" rx="10" fill="#165DFF" class="hover:opacity-90 cursor-pointer" />
-                                    <rect x="550" y="50" width="120" height="60" rx="10" fill="#165DFF" class="hover:opacity-90 cursor-pointer" />
-                                    
-                                    <!-- 连接线 -->
-                                    <line x1="170" y1="80" x2="300" y2="80" stroke="#165DFF" stroke-width="3" stroke-linecap="round" />
-                                    <line x1="420" y1="80" x2="550" y2="80" stroke="#165DFF" stroke-width="3" stroke-linecap="round" />
-                                    
-                                    <!-- 箭头 -->
-                                    <polygon points="295,75 300,80 295,85" fill="#165DFF" />
-                                    <polygon points="545,75 550,80 545,85" fill="#165DFF" />
-                                    
-                                    <!-- 文字 -->
-                                    <text x="110" y="85" text-anchor="middle" fill="white" font-size="14" font-weight="bold">提交申请</text>
-                                    <text x="360" y="85" text-anchor="middle" fill="white" font-size="14" font-weight="bold">数据查看</text>
-                                    <text x="610" y="85" text-anchor="middle" fill="white" font-size="14" font-weight="bold">ERP提交</text>
-                                    
-                                    <!-- 标题 -->
-                                    <text x="400" y="30" text-anchor="middle" fill="#4E5969" font-size="16" font-weight="bold">办公用品申请流程</text>
-                                </svg>
+
+                        <div id="lyrics-container" class="lyrics-container bg-white rounded-lg p-6 shadow-sm overflow-y-auto flex-grow">
+                            <div class="text-center py-12 text-dark/50">
+                                <i class="fa fa-quote-left text-4xl mb-4 block"></i>
+                                <p>识别音乐后将在此显示歌词</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于区域 -->
+        <section id="about" class="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6 font-display">关于音乐识别 - 歌词秀</h2>
+                    <p class="text-lg text-dark/70 mb-8">
+                        我们的音乐识别技术能够快速准确地识别周围播放的音乐，并即时获取歌词。支持多种歌词显示模式，满足不同场景下的需求。
+                    </p>
+                    <div class="flex justify-center space-x-6 mt-10">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-bolt text-2xl text-primary"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">快速识别</h4>
+                            <p class="text-dark/60">几秒钟内完成音乐识别</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-cloud text-2xl text-secondary"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">云端数据</h4>
+                            <p class="text-dark/60">海量音乐数据库支持</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-sliders text-2xl text-accent"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">多种模式</h4>
+                            <p class="text-dark/60">多种歌词展示模式</p>
                         </div>
                     </div>
                 </div>
@@ -154,31 +218,31 @@
     </main>
 
     <!-- 页脚 -->
-    <footer class="bg-primary text-white py-12">
+    <footer class="bg-dark text-white py-12">
         <div class="container mx-auto px-4">
             <div class="text-center">
                 <div class="flex items-center justify-center space-x-2 mb-4">
-                    <div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                        <i class="fa fa-building-o text-white text-xl"></i>
+                    <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                        <i class="fa fa-music text-white text-xl"></i>
                     </div>
-                    <span class="text-xl font-bold">BP工作站</span>
+                    <span class="text-xl font-bold font-display">音乐识别 - 歌词秀</span>
                 </div>
                 <p class="text-white/70 mb-4 max-w-2xl mx-auto">
-                    为企业提供高效、便捷的行政服务平台，简化流程，提升效率。
+                    随时随地识别音乐，获取歌词，享受个性化的音乐体验。
                 </p>
                 <div class="flex justify-center space-x-4 mb-8">
-                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-custom">
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary/50 transition-custom">
+                        <i class="fa fa-github"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary/50 transition-custom">
                         <i class="fa fa-weixin"></i>
                     </a>
-                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-custom">
-                        <i class="fa fa-weibo"></i>
-                    </a>
-                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-custom">
-                        <i class="fa fa-envelope"></i>
+                    <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary/50 transition-custom">
+                        <i class="fa fa-twitter"></i>
                     </a>
                 </div>
                 <p class="text-white/50 text-sm">
-                    © 2025 BP工作站. 保留所有权利.
+                    © 2023 音乐识别 - 歌词秀. 保留所有权利.
                 </p>
             </div>
         </div>
@@ -213,6 +277,269 @@
                 header.classList.remove('shadow-md');
             }
         });
+        
+        // 音乐识别功能
+        const recordBtn = document.getElementById('record-btn');
+        const uploadBtn = document.getElementById('upload-btn');
+        const recognitionResult = document.getElementById('recognition-result');
+        const lyricsContainer = document.getElementById('lyrics-container');
+        const modeButtons = document.querySelectorAll('#mode-default, #mode-karaoke, #mode-scroll');
+        let currentMode = 'default';
+        
+        // 模拟音乐识别
+        recordBtn.addEventListener('click', async () => {
+            // 更改按钮状态
+            recordBtn.classList.remove('pulse-animation');
+            recordBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i><span>识别中...</span>';
+            recordBtn.disabled = true;
+            
+            // 模拟识别过程
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            
+            // 模拟识别结果
+            const songInfo = {
+                title: '海阔天空',
+                artist: 'Beyond',
+                album: '乐与怒',
+                cover: 'https://picsum.photos/300/300?random=1',
+                duration: '4:38'
+            };
+            
+            // 显示识别结果
+            showRecognitionResult(songInfo);
+            
+            // 获取歌词
+            await fetchLyrics(songInfo.title, songInfo.artist);
+            
+            // 恢复按钮状态
+            recordBtn.classList.add('pulse-animation');
+            recordBtn.innerHTML = '<i class="fa fa-microphone"></i><span>开始识别</span>';
+            recordBtn.disabled = false;
+        });
+        
+        // 上传音频按钮
+        uploadBtn.addEventListener('click', () => {
+            alert('上传音频功能开发中...');
+        });
+        
+        // 切换歌词显示模式
+        modeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除所有按钮的active状态
+                modeButtons.forEach(btn => btn.classList.remove('active', 'bg-primary/10', 'text-primary', 'bg-secondary/10', 'text-secondary', 'bg-accent/10', 'text-accent'));
+                
+                // 添加当前按钮的active状态
+                currentMode = button.id.replace('mode-', '');
+                button.classList.add('active');
+                
+                // 根据模式设置不同的样式
+                if (currentMode === 'default') {
+                    button.classList.add('bg-primary/10', 'text-primary');
+                } else if (currentMode === 'karaoke') {
+                    button.classList.add('bg-secondary/10', 'text-secondary');
+                } else if (currentMode === 'scroll') {
+                    button.classList.add('bg-accent/10', 'text-accent');
+                }
+                
+                // 更新歌词显示模式
+                updateLyricsDisplayMode();
+            });
+        });
+        
+        // 显示识别结果
+        function showRecognitionResult(songInfo) {
+            recognitionResult.innerHTML = `
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-6 p-4 bg-white rounded-lg shadow-sm">
+                    <img src="${songInfo.cover}" alt="专辑封面" class="w-32 h-32 rounded-lg shadow-md object-cover">
+                    <div class="flex-grow">
+                        <h4 class="text-2xl font-bold text-primary mb-1">${songInfo.title}</h4>
+                        <p class="text-dark/70 mb-2">${songInfo.artist}</p>
+                        <p class="text-dark/50 text-sm mb-4">${songInfo.album} · ${songInfo.duration}</p>
+                        <div class="flex space-x-3">
+                            <button class="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-custom flex items-center space-x-1">
+                                <i class="fa fa-play"></i>
+                                <span>播放</span>
+                            </button>
+                            <button class="px-4 py-2 bg-white hover:bg-gray-100 text-dark border border-gray-200 rounded-lg transition-custom flex items-center space-x-1">
+                                <i class="fa fa-heart-o"></i>
+                                <span>收藏</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 获取歌词
+        async function fetchLyrics(title, artist) {
+            // 模拟从API获取歌词
+            // 实际应用中，这里会调用音乐识别API和歌词获取API
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // 模拟歌词数据
+            const lyrics = `[00:00.00] 海阔天空 - Beyond
+[00:05.00] 词：黄家驹
+[00:10.00] 曲：黄家驹
+[00:23.89] 今天我 寒夜里看雪飘过
+[00:29.95] 怀著冷却了的心窝飘远方
+[00:36.01] 风雨里追赶 雾里分不清影踪
+[00:42.07] 天空海阔你与我 可会变（谁没在变）
+[00:48.13] 多少次 迎著冷眼与嘲笑
+[00:54.19] 从没有放弃过心中的理想
+[01:00.25] 一刹那恍惚 若有所失的感觉
+[01:06.31] 不知不觉已变淡 心里爱（谁明白我）
+[01:12.37] 原谅我这一生不羁放纵爱自由
+[01:18.43] 也会怕有一天会跌倒
+[01:24.49] 被弃了理想谁人都可以
+[01:30.55] 那会怕有一天只你共我
+[01:36.61] 今天我 寒夜里看雪飘过
+[01:42.67] 怀著冷却了的心窝飘远方
+[01:48.73] 风雨里追赶 雾里分不清影踪
+[01:54.79] 天空海阔你与我 可会变（谁没在变）
+[02:00.85] 原谅我这一生不羁放纵爱自由
+[02:06.91] 也会怕有一天会跌倒
+[02:12.97] 被弃了理想谁人都可以
+[02:19.03] 那会怕有一天只你共我
+[02:39.21] 仍然自由自我 永远高唱我歌 走遍千里
+[02:51.33] 原谅我这一生不羁放纵爱自由
+[02:57.39] 也会怕有一天会跌倒
+[03:03.45] 被弃了理想谁人都可以
+[03:09.51] 那会怕有一天只你共我
+[03:15.57] 原谅我这一生不羁放纵爱自由
+[03:21.63] 也会怕有一天会跌倒
+[03:27.69] 被弃了理想谁人都可以
+[03:33.75] 那会怕有一天只你共我`;
+            
+            // 解析歌词
+            const parsedLyrics = parseLyrics(lyrics);
+            
+            // 显示歌词
+            displayLyrics(parsedLyrics);
+        }
+        
+        // 解析歌词
+        function parseLyrics(lyrics) {
+            const lines = lyrics.split('\n');
+            const parsed = [];
+            const timeRegex = /\[(\d{2}:\d{2}\.\d{2})\]/g;
+            
+            for (const line of lines) {
+                const timeMatches = [...line.matchAll(timeRegex)];
+                if (timeMatches.length > 0) {
+                    const text = line.replace(timeRegex, '').trim();
+                    if (text) {
+                        for (const match of timeMatches) {
+                            const timeStr = match[1];
+                            const [minutes, seconds] = timeStr.split(':');
+                            const timeInSeconds = parseInt(minutes) * 60 + parseFloat(seconds);
+                            parsed.push({
+                                time: timeInSeconds,
+                                text
+                            });
+                        }
+                    }
+                }
+            }
+            
+            return parsed;
+        }
+        
+        // 显示歌词
+        function displayLyrics(lyrics) {
+            lyricsContainer.innerHTML = '';
+            
+            if (lyrics.length === 0) {
+                lyricsContainer.innerHTML = `
+                    <div class="text-center py-12 text-dark/50">
+                        <i class="fa fa-quote-left text-4xl mb-4 block"></i>
+                        <p>未找到歌词</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 创建歌词行
+            const fragment = document.createDocumentFragment();
+            
+            lyrics.forEach((line, index) => {
+                const div = document.createElement('div');
+                div.className = `lyrics-line text-center py-2 ${currentMode === 'scroll' ? 'transition-transform duration-500' : ''}`;
+                div.dataset.time = line.time;
+                div.textContent = line.text;
+                fragment.appendChild(div);
+            });
+            
+            lyricsContainer.appendChild(fragment);
+            
+            // 初始化歌词显示模式
+            updateLyricsDisplayMode();
+        }
+        
+        // 更新歌词显示模式
+        function updateLyricsDisplayMode() {
+            const lyricsLines = document.querySelectorAll('.lyrics-line');
+            
+            if (currentMode === 'default') {
+                // 默认模式
+                lyricsContainer.classList.remove('flex', 'items-center', 'justify-center');
+                lyricsContainer.classList.add('block');
+                lyricsLines.forEach(line => {
+                    line.classList.remove('py-6', 'text-xl');
+                    line.classList.add('py-2', 'text-base');
+                });
+            } else if (currentMode === 'karaoke') {
+                // 卡拉OK模式
+                lyricsContainer.classList.add('flex', 'items-center', 'justify-center', 'flex-col');
+                lyricsLines.forEach(line => {
+                    line.classList.remove('py-2', 'text-base');
+                    line.classList.add('py-6', 'text-xl');
+                });
+                
+                // 模拟卡拉OK效果
+                simulateKaraoke();
+            } else if (currentMode === 'scroll') {
+                // 滚动模式
+                lyricsContainer.classList.remove('flex', 'items-center', 'justify-center');
+                lyricsContainer.classList.add('block');
+                lyricsLines.forEach(line => {
+                    line.classList.remove('py-6', 'text-xl');
+                    line.classList.add('py-2', 'text-base');
+                });
+            }
+        }
+        
+        // 模拟卡拉OK效果
+        function simulateKaraoke() {
+            const lyricsLines = document.querySelectorAll('.lyrics-line');
+            let currentIndex = 0;
+            
+            // 先移除所有active类
+            lyricsLines.forEach(line => line.classList.remove('active'));
+            
+            // 设置初始active行
+            if (lyricsLines.length > 0) {
+                lyricsLines[0].classList.add('active');
+            }
+            
+            // 模拟歌词滚动
+            const interval = setInterval(() => {
+                currentIndex++;
+                
+                if (currentIndex >= lyricsLines.length) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                // 移除上一行的active类
+                lyricsLines[currentIndex - 1].classList.remove('active');
+                
+                // 添加当前行的active类
+                lyricsLines[currentIndex].classList.add('active');
+                
+                // 滚动到当前行
+                lyricsContainer.scrollTop = lyricsLines[currentIndex].offsetTop - 100;
+            }, 3000);
+        }
     </script>
 </body>
 </html>
