@@ -1,47 +1,62 @@
-# 音乐识别 - 歌词秀
+# 抽奖网页应用
 
-一个现代化的音乐识别网站，能够识别用户听到的音乐，提取并显示对应的歌词，同时支持多种歌词显示模式。
-
-## 功能特点
-
-- **音乐识别**：通过麦克风录制或上传音频文件识别音乐
-- **歌词提取**：自动获取识别到的音乐的歌词
-- **多种显示模式**：
-  - 默认模式：常规歌词显示
-  - 卡拉OK模式：大屏幕歌词展示，逐行高亮
-  - 滚动模式：平滑滚动显示歌词
-- **响应式设计**：适配各种屏幕尺寸的设备
-- **现代UI**：采用渐变色彩、阴影效果和动画过渡，提供美观的用户体验
+## 项目概述
+这是一个基于Web的抽奖应用，具有以下特点：
+- 设置10份抽奖额度及2个中奖名额
+- 实现具备唯一性的中奖核销功能
+- 使用Firebase实现不同用户间的数据同步
+- 部署至GitHub Pages后可直接访问使用
 
 ## 技术栈
+- 前端：HTML, CSS, JavaScript, Tailwind CSS, Font Awesome
+- 后端：Firebase Realtime Database
+- 部署：GitHub Pages
 
-- **前端**：HTML, CSS, JavaScript
-- **CSS框架**：Tailwind CSS
-- **图标**：Font Awesome
-- **工具**：Git
+## 功能介绍
+1. **抽奖功能**：用户可参与一次抽奖，系统随机产生中奖结果
+2. **核销功能**：中奖用户可使用唯一核销码兑换奖品
+3. **数据同步**：所有用户数据存储在Firebase云端数据库，确保数据一致性
+4. **响应式设计**：适配各种屏幕尺寸的设备
 
-## 使用方法
+## 使用说明
+1. 访问网页后，点击"立即抽奖"按钮参与抽奖
+2. 抽奖结束后，查看结果
+3. 若中奖，妥善保管您的核销码
+4. 进入"中奖核销"页面，输入核销码进行兑换
 
-1. 点击"开始识别"按钮，允许网站使用麦克风权限
-2. 网站将录制周围的音乐并进行识别
-3. 识别完成后，将显示歌曲信息和歌词
-4. 可以切换不同的歌词显示模式（默认、卡拉OK、滚动）
-5. 也可以通过"上传音频"按钮上传音频文件进行识别（开发中）
+## Firebase配置指南
+1. 访问[Firebase控制台](https://console.firebase.google.com/)
+2. 创建新项目
+3. 在项目设置中获取您的Firebase配置信息
+4. 替换`lottery.html`文件中的Firebase配置：
+```javascript
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+```
+5. 启用Firebase Realtime Database
 
-## 部署说明
-
-1. 将项目克隆到本地：`git clone https://github.com/zhangxuqi125656/lybpnb.git`
-2. 进入项目目录：`cd lybpnb`
-3. 打开 `index.html` 文件即可运行
+## 部署步骤
+1. 将代码提交至GitHub仓库
+2. 在仓库设置中启用GitHub Pages
+3. 选择主分支作为来源
+4. 访问生成的GitHub Pages URL
 
 ## 开发计划
+1. 添加用户认证功能
+2. 优化抽奖动画效果
+3. 添加奖品管理功能
+4. 增加活动统计和数据分析
 
-1. 接入实际的音乐识别API和歌词API
-2. 完善音频上传功能
-3. 添加播放控制功能
-4. 增加历史记录功能
-5. 优化移动端体验
+## 注意事项
+- 本应用使用localStorage存储用户标识，在隐私模式下可能无法正常工作
+- 请确保正确配置Firebase，否则数据同步功能将无法使用
+- 为保证公平性，每个用户仅限参与一次抽奖
 
-## 贡献
-
-欢迎对项目提出建议和改进，提交PR或Issue。
+© 2023 抽奖网页应用. 保留所有权利.

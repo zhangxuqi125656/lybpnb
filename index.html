@@ -132,49 +132,24 @@
                 <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-soft p-8 md:p-12">
                     <div class="flex items-center mb-8">
                         <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mr-4">
-                            <i class="fa fa-pencil-square-o text-xl text-primary"></i>
+                            <i class="fa fa-music text-xl text-primary"></i>
                         </div>
-                        <h2 class="text-2xl md:text-3xl font-bold text-primary">办公用品申请流程</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold text-primary">识别结果</h2>
                     </div>
                     
-                    <div class="prose max-w-none">
-                        <p class="text-lg text-neutral-dark/80 mb-8">
-                            本流程适用于公司员工申请各类办公用品，包括文具、电脑设备、办公家具等。请按照以下步骤完成申请：
-                        </p>
-                        
-                        <!-- 步骤展示 -->
-                        <div class="space-y-8 mb-12">
-                            <!-- 步骤1 -->
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">1</div>
-                                <div class="ml-4">
-                                    <h3 class="text-xl font-bold mb-2 text-primary">提交申请</h3>
-                                    <p class="text-neutral-dark/70">
-                                        按需进行数据提交，<a href="https://f.kdocs.cn/ksform/w/write/KB56ZUKb" target="_blank" class="text-primary hover:underline">点击此处进行提交</a>。
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <!-- 步骤2 -->
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">2</div>
-                                <div class="ml-4">
-                                    <h3 class="text-xl font-bold mb-2 text-primary">点击链接查看数据</h3>
-                                    <p class="text-neutral-dark/70">
-                                        <a href="https://www.kdocs.cn/l/cetguPn3l7o0" target="_blank" class="text-primary hover:underline">数据查看</a>
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <!-- 步骤3 -->
-                            <div class="flex">
-                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">3</div>
-                                <div class="ml-4">
-                                    <h3 class="text-xl font-bold mb-2 text-primary">提交ERP申请</h3>
-                                    <p class="text-neutral-dark/70">
-                                        打开链接找到自己提交的数据，复制出去，贴到上传模板中，上传ERP进行数据提交。
-                                    </p>
-                                </div>
+                    <div id="recognition-result" class="mb-8 p-6 bg-gray-50 rounded-lg text-center">
+                        <i class="fa fa-headphones text-5xl text-primary/30 mb-4"></i>
+                        <p class="text-lg text-dark/50">等待音乐识别...</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-secondary mb-4">歌词展示</h3>
+                        <div class="flex space-x-2 mb-6">
+                            <button id="mode-default" class="px-3 py-1 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-custom active">默认模式</button>
+                            <button id="mode-karaoke" class="px-3 py-1 rounded bg-secondary/10 text-secondary hover:bg-secondary/20 transition-custom">卡拉OK</button>
+                            <button id="mode-scroll" class="px-3 py-1 rounded bg-accent/10 text-accent hover:bg-accent/20 transition-custom">滚动模式</button>
+                        </div>
+                    </div>
                                 <h3 class="text-2xl font-bold text-secondary">歌词展示</h3>
                             </div>
                             <div class="flex space-x-2">
